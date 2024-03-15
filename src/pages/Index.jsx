@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, Image, Grid, Button, Container, Stack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Grid, Button, Container, Stack, useColorModeValue, useColorMode, IconButton } from "@chakra-ui/react";
+import { FaSun, FaMoon } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 
 const products = [
@@ -21,6 +22,7 @@ const products = [
 ];
 
 const Index = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
@@ -29,12 +31,15 @@ const Index = () => {
 
   return (
     <Container maxW="container.lg" py={8}>
+      <Box textAlign="right" mb={4}>
+        <IconButton icon={colorMode === "light" ? <FaMoon /> : <FaSun />} onClick={toggleColorMode} variant="ghost" />
+      </Box>
       <Heading as="h1" size="xl" textAlign="center" mb={8}>
         Welcome to Our Store
       </Heading>
       <Grid templateColumns={["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"]} gap={6}>
         {products.map((product) => (
-          <Box key={product.id} borderWidth={1} borderRadius="lg" overflow="hidden" p={4} bg={useColorModeValue("white", "gray.800")}>
+          <Box key={product.id} borderWidth={1} borderRadius="lg" overflow="hidden" p={4} bg={useColorModeValue("white", "gray.700")}>
             <Image src={product.image} alt={product.name} mb={4} />
             <Heading as="h2" size="md" mb={2}>
               {product.name}
