@@ -1,33 +1,21 @@
-import React, { useState } from "react";
-import { Button, Input } from "@chakra-ui/react";
+import React from "react";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import ProductForm from "../components/ProductForm";
 
-const addProduct = (product) => {
-  console.log("Product added:", product);
-};
-
-const ProductForm = ({ addProduct }) => {
-  const [product, setProduct] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (product) {
-      addProduct(product);
-      setProduct("");
-    }
+const Index = () => {
+  const addProduct = (product) => {
+    console.log("Product added:", product);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input placeholder="Enter product name" value={product} onChange={(event) => setProduct(event.target.value)} />
-      <Button type="submit" colorScheme="blue">
-        Add Product
-      </Button>
-    </form>
+    <Box>
+      <Heading as="h1" size="xl" mb={4}>
+        Welcome to My Store
+      </Heading>
+      <Text mb={8}>Here you can find a variety of products. Use the form below to add new products to the store.</Text>
+      <ProductForm addProduct={addProduct} />
+    </Box>
   );
-};
-
-const Index = () => {
-  return <ProductForm addProduct={addProduct} />;
 };
 
 export default Index;
